@@ -1,0 +1,1256 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_symbol",
+						"type": "string"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_decimal",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_lockedPeriod",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_annualInterestRate",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_depositExpirationDays",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "_claimPeriod",
+						"type": "uint8"
+					},
+					{
+						"internalType": "address",
+						"name": "_skimAddress",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "enum StakingContractLibrary.Status",
+						"name": "_newStatus",
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_contractAddress",
+						"type": "address"
+					}
+				],
+				"name": "StatusSwitched",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Transfer",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "approval",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_contractAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_investingStartTime",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "_pubkey",
+						"type": "string"
+					}
+				],
+				"name": "ethersSentToTheStakingContract",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_contractAddress",
+						"type": "address"
+					}
+				],
+				"name": "fundsReceived",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "seller",
+						"type": "address"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							}
+						],
+						"indexed": false,
+						"internalType": "struct StakingContractLibrary.SellStruct",
+						"name": "_swapInfo",
+						"type": "tuple"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_contractAddress",
+						"type": "address"
+					}
+				],
+				"name": "offered",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_contractAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_lockedPeriodInDays",
+						"type": "uint256"
+					}
+				],
+				"name": "readyToInvest",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_claimedAmount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_contractAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_userBalance",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_time",
+						"type": "uint256"
+					}
+				],
+				"name": "sentRewards",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "seller",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "buyer",
+						"type": "address"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							}
+						],
+						"indexed": false,
+						"internalType": "struct StakingContractLibrary.SellStruct",
+						"name": "_swapInfo",
+						"type": "tuple"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_contractAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_sellerBalance",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_buyerBalance",
+						"type": "uint256"
+					}
+				],
+				"name": "sold",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_contractAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_lockedPeriodInDays",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_annualRate",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_depositExpirationDays",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_time",
+						"type": "uint256"
+					}
+				],
+				"name": "stakingInstanceCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_userAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_contractAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_userBalance",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_time",
+						"type": "uint256"
+					}
+				],
+				"name": "tokenSwapedForEth",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_userAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_contract",
+						"type": "address"
+					}
+				],
+				"name": "transferEth",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_depositAmount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_userAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_contractAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_userBalance",
+						"type": "uint256"
+					}
+				],
+				"name": "userDeposit",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_delegate",
+						"type": "address"
+					}
+				],
+				"name": "allowance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "annualInterestRate",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_delegate",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_value",
+						"type": "uint256"
+					}
+				],
+				"name": "approve",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_seller",
+						"type": "address"
+					}
+				],
+				"name": "buyUserOffer",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_claimer",
+						"type": "address"
+					}
+				],
+				"name": "claim",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "claimAllowed",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "claimPeriod",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint16",
+						"name": "",
+						"type": "uint16"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "claimedRewards",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "decimals",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "deposit",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "depositAllowed",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "depositExpirationDays",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_pubkey",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_withdrawalCredentials",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_signature",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_depositDataRoot",
+						"type": "string"
+					}
+				],
+				"name": "depositToStakingContract",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "hasNodeColapsed",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "investmentPhase",
+				"outputs": [
+					{
+						"internalType": "uint16",
+						"name": "",
+						"type": "uint16"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "investmentStartTime",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum StakingContract.pausers",
+						"name": "_item",
+						"type": "uint8"
+					}
+				],
+				"name": "isAllowed",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "isClaimPeriod",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "isDepositPeriod",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "isInvestmentPeriod",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum StakingContractLibrary.Status",
+						"name": "_passStatus",
+						"type": "uint8"
+					}
+				],
+				"name": "isStatus",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "lockedPeriod",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "manageClaimPeriod",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_price",
+						"type": "uint256"
+					}
+				],
+				"name": "offerTokens",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "refundFullInvestment",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "skimAddress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "skimEth",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "status",
+				"outputs": [
+					{
+						"internalType": "enum StakingContractLibrary.Status",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "toSell",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "tradingAllowed",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_delegate",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_value",
+						"type": "uint256"
+					}
+				],
+				"name": "transfer",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_delegate",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_value",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdrawAllowed",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
+			}
+		],
+		"devdoc": {
+			"events": {
+				"offered(address,(uint256,uint256),address)": {
+					"details": "contract events"
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"allowance(address,address)": {
+					"details": "Standard ERC20 function",
+					"params": {
+						"_delegate": "The reciver of the allowance",
+						"_owner": "The owner of the tokens"
+					}
+				},
+				"approve(address,uint256)": {
+					"details": "Standard ERC20 function",
+					"params": {
+						"_delegate": "The reciver of the allowance",
+						"_value": "The amount to approve"
+					}
+				},
+				"buyUserOffer(address)": {
+					"details": "Function is transfered protectedUse this function to buy a token offer",
+					"params": {
+						"_seller": "The address of the seller that is selling the tokens"
+					}
+				},
+				"claim(address)": {
+					"details": "Main function for both getting reward tokens and withdrawing EthOn external apps only use this one function for user claims",
+					"params": {
+						"_claimer": "The address that is being claimed for"
+					}
+				},
+				"constructor": {
+					"details": "Contract and doken setup"
+				},
+				"deposit()": {
+					"details": "This function will give user's tokens depoending on how much Eth they have sent"
+				},
+				"depositToStakingContract(string,string,string,string)": {
+					"details": "We first convert the int256 staking Id to uint16, then we check if the stake instance is ready to invest, then we convert the 4 strings given in parameter to bytes or bytes32, finally we call the deposit() function, from the DepositContract, we start the locked period timer and finally, we emit an event",
+					"params": {
+						"_depositDataRoot": "the payload deposit_data_root",
+						"_pubkey": "the payload pubkey",
+						"_signature": "the payload signature",
+						"_withdrawalCredentials": "the payload _withdrawal_credentials"
+					}
+				},
+				"isAllowed(uint8)": {
+					"details": "Checks if a item is paused",
+					"params": {
+						"_item": "The item to look look for in the pausers Enum"
+					},
+					"returns": {
+						"_0": "bool True if the item is able to be used"
+					}
+				},
+				"isClaimPeriod()": {
+					"details": "Checker function to check if certain periods have finished",
+					"returns": {
+						"_0": "True if the claim period has finished"
+					}
+				},
+				"isDepositPeriod()": {
+					"details": "Checker function to check if certain periods have finished",
+					"returns": {
+						"_0": "True if the deposit period has finished"
+					}
+				},
+				"isInvestmentPeriod()": {
+					"details": "Checker function to check if certain periods have finished",
+					"returns": {
+						"_0": "True if the investment period has finished"
+					}
+				},
+				"isStatus(uint8)": {
+					"details": "Checks if the contract is at the current passed status isStatus( lib.Status(x)); isStatus( lib.Status.{status});",
+					"params": {
+						"_passStatus": "The status to match"
+					},
+					"returns": {
+						"_0": "bool True if the status matches the contract status False if they do not match"
+					}
+				},
+				"manageClaimPeriod()": {
+					"details": "This function manages the investment and claim periodThis can also be called directly to unstick any problems with updating the status"
+				},
+				"offerTokens(uint256,uint256)": {
+					"details": "function isn't transfer protected but buying the offer is",
+					"params": {
+						"_amount": "The amount of tokens the user wants to sell",
+						"_price": "The amount of Eth in Wei that the user wants theese tokens for"
+					}
+				},
+				"refundFullInvestment()": {
+					"details": "This is used to refund a full deposit if anything goes wrong with depositing to the Eth2.0 deposit contract"
+				},
+				"skimEth()": {
+					"details": "Cannot take out more than the amount of tokens on the contractGets the total supply of the contract This will show how much wei must be on the contract Then if the amount on the contract is higher than the expected amount Send the excess off to the skimmer address"
+				},
+				"totalSupply()": {
+					"details": "Standard ERC20 functions"
+				},
+				"transfer(address,uint256)": {
+					"details": "Standard ERC20 function",
+					"params": {
+						"_delegate": "The reciver of the token",
+						"_value": "The amount to send"
+					}
+				},
+				"transferFrom(address,address,uint256)": {
+					"details": "Standard ERC20 function",
+					"params": {
+						"_delegate": "The reciver of the allowance",
+						"_owner": "The owner of the tokens",
+						"_value": "The amount of tokens to send"
+					}
+				}
+			},
+			"stateVariables": {
+				"Name": {
+					"details": "Token datastores"
+				},
+				"balances": {
+					"details": "Contract mappings"
+				},
+				"depositAllowed": {
+					"details": "Stops certain funtions if needed for the status"
+				},
+				"lock": {
+					"details": "Standard reentrancy lock"
+				},
+				"owner": {
+					"details": "Owner controls are used but only for recovery and sending of the funds to the Eth 2.0 contract"
+				},
+				"status": {
+					"details": "enum Status { Depositing, Ready_To_Invest, Investing, Claiming, Withdrawing, Refunding, Expired }"
+				}
+			},
+			"title": "@authors",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"buyUserOffer(address)": {
+					"notice": "Function will revert if the seller has no token offer Will also revert is the user pays the wrong price"
+				},
+				"claim(address)": {
+					"notice": "This function changes depending on the status of the contract This will also change the status of the contract if needed"
+				},
+				"deposit()": {
+					"notice": "The deposits will be recorded under the address of the message sender The tokens are minted directly to the sender"
+				},
+				"depositToStakingContract(string,string,string,string)": {
+					"notice": "This function will be use invest the deposited funds to the staking contract."
+				},
+				"manageClaimPeriod()": {
+					"notice": "This will change the status to the claim period if the investment has finished It will also change the claim period back to the investment period if possible If the node has colapsed and the investment has finished then allow for withdrawing"
+				},
+				"offerTokens(uint256,uint256)": {
+					"notice": "User's offer their tokens for an Eth price"
+				},
+				"skimEth()": {
+					"notice": "Takes the excess Eth of the contract"
+				},
+				"status()": {
+					"notice": "Current status of investment"
+				},
+				"totalSupply()": {
+					"notice": "Theese are the getter functions for the ERC20 data"
+				},
+				"transfer(address,uint256)": {
+					"notice": "Transfers tokens from the senders address to the _delegate address"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"StakingContract.sol": "StakingContract"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"IDepositContract.sol": {
+			"keccak256": "0xde0d8da2fdbcc84f7e315981998f158dd1d91919af62780e0bf7c8cebaa56a09",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://2a1fb796186e06916a5c4b528f2547f33651ce0be40f6798f784075774cba903",
+				"dweb:/ipfs/QmPBq7BkvWdh6UjpsJ4yhoUvamfArPaWRqaLX1Bye33jL9"
+			]
+		},
+		"StakingContract.sol": {
+			"keccak256": "0x5f00da7c37349288f53620873cabba404165a0a50d74346fa071731c5dc53336",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://6bb951b1bb7ee96159a8cf4364c5b8e27f80e8302341909dec28784b79ce53f8",
+				"dweb:/ipfs/QmPhMNZSUQzsBJxLZxABQuwgQ83fFsjecPad2kNmWCC9LZ"
+			]
+		},
+		"StakingContractLibrary.sol": {
+			"keccak256": "0x825ce16b04862e293a36471acec7709f2abca18ccd87e20ee05416353a5b71bc",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://62c66616a6ea30dab70e58ee5f9003fbceeddb67a86b824b91a81ee26c552b5e",
+				"dweb:/ipfs/QmfSLjRMQ9yWxrL7ee6mF4ZBudAypntaurMG36MnerPrgM"
+			]
+		}
+	},
+	"version": 1
+}

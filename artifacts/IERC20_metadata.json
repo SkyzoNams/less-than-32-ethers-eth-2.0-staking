@@ -1,0 +1,234 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					}
+				],
+				"name": "allowance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "approve",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "decimals",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transfer",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"StakingContract.sol": "IERC20"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"IDepositContract.sol": {
+			"keccak256": "0xde0d8da2fdbcc84f7e315981998f158dd1d91919af62780e0bf7c8cebaa56a09",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://2a1fb796186e06916a5c4b528f2547f33651ce0be40f6798f784075774cba903",
+				"dweb:/ipfs/QmPBq7BkvWdh6UjpsJ4yhoUvamfArPaWRqaLX1Bye33jL9"
+			]
+		},
+		"StakingContract.sol": {
+			"keccak256": "0x5f00da7c37349288f53620873cabba404165a0a50d74346fa071731c5dc53336",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://6bb951b1bb7ee96159a8cf4364c5b8e27f80e8302341909dec28784b79ce53f8",
+				"dweb:/ipfs/QmPhMNZSUQzsBJxLZxABQuwgQ83fFsjecPad2kNmWCC9LZ"
+			]
+		},
+		"StakingContractLibrary.sol": {
+			"keccak256": "0x825ce16b04862e293a36471acec7709f2abca18ccd87e20ee05416353a5b71bc",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://62c66616a6ea30dab70e58ee5f9003fbceeddb67a86b824b91a81ee26c552b5e",
+				"dweb:/ipfs/QmfSLjRMQ9yWxrL7ee6mF4ZBudAypntaurMG36MnerPrgM"
+			]
+		}
+	},
+	"version": 1
+}

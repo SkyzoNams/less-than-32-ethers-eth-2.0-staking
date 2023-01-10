@@ -1,0 +1,78 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"ropsten:3": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"rinkeby:4": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"kovan:42": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"goerli:5": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"deployedBytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"immutableReferences": {},
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"gasEstimates": null,
+		"methodIdentifiers": {
+			"claim(address)": "1e83409a",
+			"deposit()": "d0e30db0"
+		}
+	},
+	"abi": [
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_claimer",
+					"type": "address"
+				}
+			],
+			"name": "claim",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "deposit",
+			"outputs": [],
+			"stateMutability": "payable",
+			"type": "function"
+		}
+	]
+}
